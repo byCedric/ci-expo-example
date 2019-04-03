@@ -51,6 +51,12 @@ export default class HomeScreen extends React.Component {
               <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
             </TouchableOpacity>
           </View>
+
+          <View style={styles.getStartedContainer}>
+            <Text style={styles.getStartedText}>
+              This was published by GitHub Actions!
+            </Text>
+          </View>
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
