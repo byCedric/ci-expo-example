@@ -3,19 +3,19 @@ workflow "Install and Publish" {
   resolves = ["Publish"]
 }
 
-action "Filter branch" {
-  uses = "actions/bin/filter@master"
-  args = "branch master"
-}
-
 action "Install" {
-  needs = "Filter branch"
   uses = "actions/npm@master"
   args = "install"
 }
 
-action "Publish" {
+action "Filter branch" {
   needs = "Install"
+  uses = "actions/bin/filter@master"
+  args = "branch master"
+}
+
+action "Publish" {
+  needs = "Filter branch"
   uses = "bycedric/ci-expo@refactor/simplify"
   args = "publish"
   secrets = ["EXPO_USERNAME", "EXPO_PASSWORD"]
