@@ -1,5 +1,5 @@
-workflow "Install, Test and Build Web" {
-  on = "schedule(0/15 * * * *)"
+workflow "Install and Publish" {
+  on = "push"
   resolves = ["Publish"]
 }
 
@@ -14,8 +14,15 @@ action "Test" {
   args = "test"
 }
 
-action "Publish" {
+action "Filter branch" {
   needs = "Test"
+  uses = "actions/bin/filter@master"
+  args = "branch master"
+}
+
+action "Publish" {
+  needs = "Filter branch"
   uses = "bycedric/ci-expo@master"
-  args = "build:web"
+  args = "publish"
+  secrets = ["EXPO_USERNAME", "EXPO_PASSWORD"]
 }
