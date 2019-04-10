@@ -1,5 +1,5 @@
 workflow "Install, Test and Build Web" {
-  on = "schedule(0 8 * * *)"
+  on = "schedule(0/15 * * * *)"
   resolves = ["Publish"]
 }
 
