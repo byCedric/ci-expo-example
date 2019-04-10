@@ -1,6 +1,9 @@
 workflow "Install and Publish" {
   on = "push"
-  resolves = ["Publish"]
+  resolves = [
+    "Publish",
+    "bycedric/ci-expo",
+  ]
 }
 
 action "Install" {
@@ -25,4 +28,10 @@ action "Publish" {
   uses = "bycedric/ci-expo@master"
   args = "publish"
   secrets = ["EXPO_USERNAME", "EXPO_PASSWORD"]
+}
+
+action "bycedric/ci-expo" {
+  uses = "bycedric/ci-expo@master"
+  needs = ["Filter branch"]
+  args = "build:web"
 }
