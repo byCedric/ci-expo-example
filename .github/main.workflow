@@ -10,7 +10,10 @@ action "Install" {
 
 action "Publish" {
   needs = "Install"
-  uses = "byCedric/ci-expo@2.1.0"
+  uses = "byCedric/ci-expo@2.2.0"
   args = "publish"
-  secrets = ["EXPO_USERNAME", "EXPO_PASSWORD"]
+  secrets = [
+    "EXPO_CLI_PASSWORD",
+    "EXPO_CLI_USERNAME",
+  ]
 }
