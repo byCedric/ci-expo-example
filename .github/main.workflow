@@ -3,7 +3,13 @@ workflow "Install and Publish" {
   resolves = ["Publish"]
 }
 
+action "Filter branch" {
+  uses = "actions/bin/filter@master"
+  args = "branch master"
+}
+
 action "Install" {
+  needs = "Filter branch"
   uses = "actions/npm@master"
   args = "install"
 }
